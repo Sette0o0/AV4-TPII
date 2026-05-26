@@ -27,6 +27,8 @@ type FormType = {
   tipoDocumento: TipoDocumento | "";
   numeroDocumento: string;
   dataExpedicao: string;
+  ddd: string;
+  numeroCelular: string;
 };
 
 type Props = {
@@ -42,6 +44,8 @@ export default function CadastroCliente({ onClose }: Props) {
       tipoDocumento: "",
       numeroDocumento: "",
       dataExpedicao: "",
+      ddd: "",
+      numeroCelular: "",
     },
   });
 
@@ -67,7 +71,10 @@ export default function CadastroCliente({ onClose }: Props) {
               </Field>
               <Field>
                 <FieldLabel>Nome Social:</FieldLabel>
-                <Input {...register("nomeSocial")} placeholder="Nome social..." />
+                <Input
+                  {...register("nomeSocial")}
+                  placeholder="Nome social..."
+                />
               </Field>
               <Field>
                 <FieldLabel>Data de Nascimento:</FieldLabel>
@@ -78,12 +85,22 @@ export default function CadastroCliente({ onClose }: Props) {
           <FieldSeparator />
           <FieldSet>
             <FieldLegend>Telefone e Endereço</FieldLegend>
-            <FieldGroup>
-              <Field>
-                
+            <FieldGroup className="flex flex-row gap-5">
+              <Field className="flex-1">
+                <FieldLabel>DDD:</FieldLabel>
+                <Input
+                  {...register("ddd")}
+                  type="number"
+                  placeholder="DDD..."
+                />
               </Field>
-              <Field>
-
+              <Field className="flex-3">
+                <FieldLabel>Celular:</FieldLabel>
+                <Input
+                  {...register("numeroCelular")}
+                  type="number"
+                  placeholder="Número de celular..."
+                />
               </Field>
             </FieldGroup>
           </FieldSet>
@@ -105,9 +122,13 @@ export default function CadastroCliente({ onClose }: Props) {
 
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value={TipoDocumento.CPF}>{TipoDocumento.CPF}</SelectItem>
+                          <SelectItem value={TipoDocumento.CPF}>
+                            {TipoDocumento.CPF}
+                          </SelectItem>
 
-                          <SelectItem value={TipoDocumento.RG}>{TipoDocumento.RG}</SelectItem>
+                          <SelectItem value={TipoDocumento.RG}>
+                            {TipoDocumento.RG}
+                          </SelectItem>
 
                           <SelectItem value={TipoDocumento.Passaporte}>
                             {TipoDocumento.Passaporte}
@@ -121,11 +142,17 @@ export default function CadastroCliente({ onClose }: Props) {
               <FieldGroup className="grid grid-cols-1 @sm:grid-cols-2 gap-5!">
                 <Field>
                   <FieldLabel>Número:</FieldLabel>
-                  <Input {...register("numeroDocumento")} placeholder="Número do documento..." />
+                  <Input
+                    {...register("numeroDocumento")}
+                    placeholder="Número do documento..."
+                  />
                 </Field>
                 <Field>
                   <FieldLabel>Data de Expedição:</FieldLabel>
-                  <Input {...register("dataExpedicao")} placeholder="Data de expedição..." />
+                  <Input
+                    {...register("dataExpedicao")}
+                    placeholder="Data de expedição..."
+                  />
                 </Field>
               </FieldGroup>
             </FieldGroup>
@@ -135,7 +162,9 @@ export default function CadastroCliente({ onClose }: Props) {
             <Button type="button" variant={"outline"} onClick={onClose}>
               Cancelar
             </Button>
-            <Button type="submit">{isLoading ? "carregando..." : "Cadastrar"}</Button>
+            <Button type="submit">
+              {isLoading ? "carregando..." : "Cadastrar"}
+            </Button>
           </FieldGroup>
         </FieldGroup>
       </form>
